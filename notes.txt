@@ -1,0 +1,33 @@
+init
+    npx create-react-app <name>
+
+npx use webpack for bundling and the Babel compiler
+    
+deply using
+    npm run build
+
+next.js as styling ramework
+
+example of JS toolchain 
+    package manager : yarn or npm
+    bundler : webpack  or Parcel
+    compiler : Babel ...
+
+make sure everything is set up for production 
+    eg (bundling, minifying, React Dev browser plugin that check some env var...)
+
+start server at
+    http://localhost:3000
+    npm start 
+
+
+=== React
+    Component to tell what to render (and update/refresh rendering)
+
+// I had to force the use of bezier-js 
+v4.0.3 instead of the most up to date as it caused an export error
+https://github.com/vasturiano/react-force-graph/issues/282
+ 
+npm install 
+  react react-dom react-force-graph-2d 
+  google-protobuf bezier-js@4.0.3
