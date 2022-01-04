@@ -50,3 +50,10 @@
   background-color: #e52b50;
   color: #ffe;
 }
+
+.diagram-container {
+  height: auto;
+  width: auto;
+  background-color: blue;
+
+}

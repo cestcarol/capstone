@@ -2,7 +2,7 @@
 
 `npm ci`
 or
-`npm install react-flow-renderer`
+`npm install react-scripts react-flow-renderer elkjs web-worker`
 
 # Getting Started with Create React App
 

@@ -1,30 +1,30 @@
-import React, { useState, setState, useEffect } from 'react';
-import ReactFlow, { Handle } from 'react-flow-renderer';
+import { Handle } from 'react-flow-renderer';
 
 import RandomProgressBar from './RandomProgressBar';
 
-const CustomNodeComponent = ({ data }) => {
-    return (
-		<div className={data.className}>
-		  <Handle type="target" position="left" style={{ borderRadius: 0 }} />
-			<div>{data.text}</div>
-			{/* <RandomProgressBar /> */}
-			<b> Bidule! </b> 
-			<Handle
-				type="source"
-				position="right"
-				id="a"
-				style={{ top: '30%', borderRadius: 0 }}
-			/>
-			<Handle
-				type="source"
-				position="right"
-				id="b"
-				style={{ top: '70%', borderRadius: 0 }}
-			/>
-		</div>
+const customNodeStyles = {
+	background: '#9CA8B3',
+	color: '#FFF',
+	padding: 10,
+};
 
+const CustomNodeComponent = ({ data }) => {
+	return (
+		<div style={customNodeStyles}>
+			<Handle
+				type="source"
+				position="top"
+				style={{ borderRadius: 0 }} />
+			<div>{data.label}</div>
+
+			<div>{data.text}</div>
+			{ /* <RandomProgressBar /> */ }
+			<Handle
+				type="target"
+				position="bottom"
+				style={{ top: '100%', borderRadius: 0 }} />
+		</div>
 	);
 };
 
-export default CustomNodeComponent ;
+export default CustomNodeComponent;

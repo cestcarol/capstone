@@ -1,7 +1,11 @@
-import { json } from 'd3';
-import React, { useState, useEffect } from 'react';
+//import { json } from 'd3';
+import React, { useState,
+    // useEffect 
+} from 'react';
 
-import ReactFlow, { isEdge, getConnectedEdges, removeElements, getOutgoers, getIncomers, ReactFlowProvider, useStoreState, MiniMap } from 'react-flow-renderer';
+import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState, 
+    // isEdge, getConnectedEdges, ReactFlowProvider, MiniMap,
+} from 'react-flow-renderer';
 
 import CustomNodeComponent from './CustomNodeComponent';
 import { protoplan_to_graph } from './planparser';
