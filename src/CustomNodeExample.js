@@ -75,6 +75,8 @@ const initialElements = [
 
 const initialGraph = protoplan_to_graph(newp);
 
+const initialGraph = protoplan_to_graph(newp);
+
 function swapLeafs(n1, n2, elements) {
     var p1 = getIncomers(n1, elements).at(0);
     var p2 = getIncomers(n2, elements).at(0);
