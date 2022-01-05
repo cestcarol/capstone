@@ -11,9 +11,6 @@ import ELK from 'elkjs';
 const DEFAULT_WIDTH = 210
 const DEFAULT_HEIGHT = 100
 
-const position = { x: 0, y: 0 };
-const edgeType = 'smoothstep';
-
 const elk = new ELK({
   defaultLayoutOptions: {
     'elk.algorithm': 'mrtree',
@@ -53,8 +50,8 @@ const createGraphLayout = async (elements) => {
       const node = newGraph?.children?.find((n) => n.id === el.id)
       if (node?.x && node?.y && node?.width && node?.height) {
         el.position = {
-          x: node.x ,//- node.width / 4  , //+ Math.random() / 1000,
-          y: node.y //- node.height / 2
+          x: node.x, //- node.width / 4  , //+ Math.random() / 1000,
+          y: node.y  //- node.height / 2
         }
       }
     }
@@ -62,7 +59,40 @@ const createGraphLayout = async (elements) => {
   })
 }
 
+const nodeTypes = {
+	special: CustomNodeComponent,
+};
 
+
+const LayoutFlow = ({initialElements}) => {
+  const [elements, setElements] = useState()
+
+  useEffect(() => {
+    createGraphLayout(initialElements)
+      .then(els => setElements(els))
+      .catch(err => console.error(err))
+  }, [initialElements])
+
+  return (
+      <ReactFlow 
+      style={{
+        width: 700, height: 500,
+              position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'red'
+      }}
+        elements={elements}
+        nodeTypes={nodeTypes} />
+  )
+}
+
+export default LayoutFlow;
+
+
+
+/*
+const position = { x: 0, y: 0 };
+const edgeType = 'smoothstep';
 const initialElements = [
   {
       id: '2',
@@ -88,35 +118,4 @@ const initialElements = [
   { id: 'e2-3', source: '2', target: '3', type: edgeType, animate: 'false' },
   { id: 'e2-4', source: '2', target: '4', type: edgeType, animate: 'false' }
 ]
-
-
-const nodeTypes = {
-	special: CustomNodeComponent,
-};
-
-
-const LayoutFlow = () => {
-  const [elements, setElements] = useState()
-
-  useEffect(() => {
-    createGraphLayout(initialElements)
-      .then(els => setElements(els))
-      .catch(err => console.error(err))
-  }, [])
-
-  return (
-    <div >
-      <ReactFlow 
-      style={{
-        width: 700, height: 500,
-              position: 'absolute', left: '50%', top: '50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: 'red'
-      }}
-        elements={elements}
-        nodeTypes={nodeTypes} />
-    </div>
-  )
-}
-
-export default LayoutFlow;
+*/

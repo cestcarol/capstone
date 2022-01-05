@@ -1,12 +1,14 @@
 import './App.css';
 
 import CustomNodeExample from './CustomNodeExample'
-import LayoutFlow from './LayoutFlow';
+//import LayoutFlow from './LayoutFlow';
 
 
 function App() {
   return (
-    <div style={{ height: 600 }}>
+    <div
+      //className='diagram-container'
+      style={{ height: 600 }}>
       <CustomNodeExample />
     </div>
     /*

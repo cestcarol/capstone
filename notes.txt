@@ -31,3 +31,22 @@ https://github.com/vasturiano/react-force-graph/issues/282
 npm install 
   react react-dom react-force-graph-2d 
   google-protobuf bezier-js@4.0.3
+
+  ===
+
+  Co server
+  button click 'next'
+  récupérer les infos 
+    bindings : resultat / triple de la req
+    hasNext : bool 
+    next : string protobuf encoded   
+    stats : cardinality/
+        metrics : cost, coverage, progression
+    
+    et si on decode Next :
+
+
+réussir à afficher dans e noeux 
+- le 'o?' courant 
+- et "numero de tuple courant" / "cardinalité"
+

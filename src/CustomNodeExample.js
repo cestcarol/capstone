@@ -8,9 +8,9 @@ import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState,
 } from 'react-flow-renderer';
 
 import CustomNodeComponent from './CustomNodeComponent';
+import LayoutFlow from './LayoutFlow';
 import { protoplan_to_graph } from './planparser';
 
-//TODO voir elkjs for automatic layouting
 const nodeTypes = {
 	special: CustomNodeComponent,
 };
@@ -19,7 +19,7 @@ const saved_plan = "ErQBErEBCiUKAj9zEgI/cBoCP28iF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0
 const nope = "EkoSSAolCgI/cxICP3AaAj9vIhdodHRwOi8vZXhhbXBsZS5vcmcvdGVzdCIDNTAwKhoyMDIyLTAxLTA0VDE0OjQ3OjEyLjYxNjA3Mg==";
 const newp = "EokBCgI/cAoCP3MKAj9vKnsKYwowCgI/cxICP3AaAj9vIiJodHRwOi8vdGVzdHNlcnZlci9zcGFycWwvd2F0ZGl2MTAwIgM1MDAqGjIwMjItMDEtMDRUMTY6MDE6NTEuMTY2MjMxMOmkmgVA6aSaBUj0A1D0AzIOcmVnZXgoP3MsICJjIilA9ANI9AM=";
 
-
+/*
 const initialElements = [
 	{
 		id: '2',
@@ -71,6 +71,7 @@ const initialElements = [
     {id: 'e4-8', source: '4', target: '8', animate: 'false'},
 	
 ];
+*/
 
 const initialGraph = protoplan_to_graph(newp);
 
@@ -164,10 +165,13 @@ const CustomNodeExample = () => {
 
     return (
         <div style={{ height: 600 }}>
-            <ReactFlow elements={elements} nodeTypes={nodeTypes}
-                    onElementClick={onElementClick}>
+            <LayoutFlow 
+                initialElements={elements}
+                //elements={elements} 
+                nodeTypes={nodeTypes}
+                onElementClick={onElementClick}>
               <NodesDebugger />
-            </ReactFlow>
+            </LayoutFlow>
         </div>
 	);
 };
