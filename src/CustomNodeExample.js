@@ -20,6 +20,11 @@ let sparqlRequest = {
   "defaultGraph": "http://example.com/"
 };
 let sparqlServer = "http://localhost:8000/sparql";
+<<<<<<< HEAD
+=======
+
+const initialGraph = protoplan_to_graph(newp);
+>>>>>>> fc5e6e6ccdd5d48be15c9fa56b322d217d4b8ce2
 
 function swapLeafs(n1, n2, elements) {
     var p1 = getIncomers(n1, elements).at(0);
@@ -128,13 +133,9 @@ const CustomNodeExample = () => {
 
     return (
         <div style={{ height: 600 }}>
-            <LayoutFlow 
-                initialElements={elements}
-                //elements={elements} 
-                nodeTypes={nodeTypes}
-                onElementClick={onElementClick}>
-              <NodesDebugger />
-            </LayoutFlow>
+            <ReactFlow elements={elements} nodeTypes={nodeTypes}
+                    onElementClick={onElementClick}>
+            </ReactFlow>
         </div>
 	);
 };
