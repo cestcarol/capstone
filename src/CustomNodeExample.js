@@ -1,14 +1,9 @@
-//import { json } from 'd3';
-import React, { useState,
-    // useEffect 
-} from 'react';
-
+import React, { useState, useEffect } from 'react';
 import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState, 
     // isEdge, getConnectedEdges, ReactFlowProvider, MiniMap,
 } from 'react-flow-renderer';
 
 import CustomNodeComponent from './CustomNodeComponent';
-import LayoutFlow from './LayoutFlow';
 import { protoplan_to_graph } from './planparser';
 
 const nodeTypes = {
@@ -20,11 +15,6 @@ let sparqlRequest = {
   "defaultGraph": "http://example.com/"
 };
 let sparqlServer = "http://localhost:8000/sparql";
-<<<<<<< HEAD
-=======
-
-const initialGraph = protoplan_to_graph(newp);
->>>>>>> fc5e6e6ccdd5d48be15c9fa56b322d217d4b8ce2
 
 function swapLeafs(n1, n2, elements) {
     var p1 = getIncomers(n1, elements).at(0);
