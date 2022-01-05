@@ -13,8 +13,8 @@ const nodeTypes = {
 
 const saved_plan = "ErQBErEBCiUKAj9zEgI/cBoCP28iF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0GikKAj9wEiNodHRwOi8vcHVybC5vcmcvZ29vZHJlbGF0aW9ucy9wcmljZRoKCgI/bxIEIjM2IhowCgI/cxIqaHR0cDovL2RiLnV3YXRlcmxvby5jYS9+Z2FsdWMvd3NkYm0vT2ZmZXIxIgMyNDYqGjIwMjEtMTItMTdUMTU6MTg6NTAuNTE1OTIy";
 const nope = "EkoSSAolCgI/cxICP3AaAj9vIhdodHRwOi8vZXhhbXBsZS5vcmcvdGVzdCIDNTAwKhoyMDIyLTAxLTA0VDE0OjQ3OjEyLjYxNjA3Mg==";
-const other = "EpYFGpMFCpMCCiUKAj9vEgI/cBoCP3MiF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0GicKAj9vEiFodHRwOi8vaGFydGgub3JnL2FuZHJlYXMvZm9hZiNiaW8aMgoCP3ASLGh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDEvcmRmLXNjaGVtYSNzZWVBbHNvGmwKAj9zEmZodHRwOi8vcmRmLm9wZW5tb2xlY3VsZXMubmV0Lz9JbkNoST0xL0MxMkg4TzJTL2MxMy04LTUtNi0xMC0xMSgxMig4KTE0KTctMy0xLTItNC05KDcpMTUtMTAvaDEtNiwxMy0xNEgiAzY4MSoaMjAyMi0wMS0wNFQxNDoxMjo1NC45Njk1Mjgy4AEKJQoCP3MSAj9wGgI/byIXaHR0cDovL2V4YW1wbGUub3JnL3Rlc3QSJwoCP28SIWh0dHA6Ly9oYXJ0aC5vcmcvYW5kcmVhcy9mb2FmI2JpbxI7CgI/cxI1aHR0cDovL29wZW5mbHlkYXRhLm9yZy9pZC9mbHliYXNlL2ZlYXR1cmUvRkJnbjAwNTM5MTkSMgoCP3ASLGh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDEvcmRmLXNjaGVtYSNzZWVBbHNvIgEwKhoyMDIyLTAxLTA0VDE0OjEyOjU0Ljk2OTUyOFonCgI/bxIhaHR0cDovL2hhcnRoLm9yZy9hbmRyZWFzL2ZvYWYjYmlvWjIKAj9wEixodHRwOi8vd3d3LnczLm9yZy8yMDAwLzAxL3JkZi1zY2hlbWEjc2VlQWxzb1o7CgI/cxI1aHR0cDovL29wZW5mbHlkYXRhLm9yZy9pZC9mbHliYXNlL2ZlYXR1cmUvRkJnbjAwNTM5MTk=";
-protoplan_to_graph(other);
+const newp = "EokBCgI/cAoCP3MKAj9vKnsKYwowCgI/cxICP3AaAj9vIiJodHRwOi8vdGVzdHNlcnZlci9zcGFycWwvd2F0ZGl2MTAwIgM1MDAqGjIwMjItMDEtMDRUMTY6MDE6NTEuMTY2MjMxMOmkmgVA6aSaBUj0A1D0AzIOcmVnZXgoP3MsICJjIilA9ANI9AM=";
+
 
 const initialElements = [
 	{
@@ -68,6 +68,8 @@ const initialElements = [
 	
 ];
 
+const initialGraph = protoplan_to_graph(newp);
+
 function swapLeafs(n1, n2, elements) {
     var p1 = getIncomers(n1, elements).at(0);
     var p2 = getIncomers(n2, elements).at(0);
@@ -120,7 +122,7 @@ const NodesDebugger = () => {
 };
 
 const CustomNodeExample = () => {
-    const [elements, setElements] = useState(initialElements);
+    const [elements, setElements] = useState(initialGraph);
     const [lastSelection, setLastSelection] = useState(null);
 
     const onElementClick = (_, element) => {

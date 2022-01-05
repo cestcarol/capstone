@@ -29,21 +29,25 @@ const iterate = (obj) => {
 const breadth_iter = (obj) => {
   var vertex = [];
   var edges = [];
-  var queue = [obj];
+  var queue = [[obj, null]];
   var id = 0;
+  var parent = null;
 
   while (queue.length > 0) {
-    var obj = queue.shift();
+    var [obj, parentId] = queue.shift();
     for (let key in obj) {
 
       if (obj[key] !== undefined && (is_node(key) || is_leaf(key))) {
-        vertex.push({id: id, type: 'special', data: { text: key, className: 'cnode' }});
-        queue.push(obj[key]);
+        vertex.push({id: id, type: 'special', position: { x: 100, y: 100 }, data: { text: key, className: 'cnode' }});
+        queue.push([obj[key], id]);
+        if (parentId !== null) {
+          edges.push({id: 'e'+parentId+id, source: parentId, target: id, animate: 'false'});
+        }
         id++;
       }
     }
   }
-  return vertex;
+  return vertex.concat(edges);
 }
 
 export function protoplan_to_graph(plan) {
@@ -52,5 +56,7 @@ export function protoplan_to_graph(plan) {
   console.log(decodeplan);
   var jsonplan = proto.RootTree.deserializeBinary(decodeplan).toObject();
   console.log(jsonplan);
-  //console.log("Breadth iteration -> \n", breadth_iter(jsonplan));
+  const graph = breadth_iter(jsonplan);
+  console.log("Breadth iteration -> \n", graph);
+  return graph;
 }
