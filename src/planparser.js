@@ -31,12 +31,10 @@ const breadth_iter = (obj) => {
   var edges = [];
   var queue = [[obj, null]];
   var id = 0;
-  var parent = null;
 
   while (queue.length > 0) {
     var [obj, parentId] = queue.shift();
     for (let key in obj) {
-
       if (obj[key] !== undefined && (is_node(key) || is_leaf(key))) {
         vertex.push({id: id, type: 'special', position: { x: 100, y: 100 }, data: { text: key, className: 'cnode' }});
         queue.push([obj[key], id]);
