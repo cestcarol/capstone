@@ -15,62 +15,11 @@ const nodeTypes = {
 	special: CustomNodeComponent,
 };
 
-const saved_plan = "ErQBErEBCiUKAj9zEgI/cBoCP28iF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0GikKAj9wEiNodHRwOi8vcHVybC5vcmcvZ29vZHJlbGF0aW9ucy9wcmljZRoKCgI/bxIEIjM2IhowCgI/cxIqaHR0cDovL2RiLnV3YXRlcmxvby5jYS9+Z2FsdWMvd3NkYm0vT2ZmZXIxIgMyNDYqGjIwMjEtMTItMTdUMTU6MTg6NTAuNTE1OTIy";
-const nope = "EkoSSAolCgI/cxICP3AaAj9vIhdodHRwOi8vZXhhbXBsZS5vcmcvdGVzdCIDNTAwKhoyMDIyLTAxLTA0VDE0OjQ3OjEyLjYxNjA3Mg==";
-const newp = "EokBCgI/cAoCP3MKAj9vKnsKYwowCgI/cxICP3AaAj9vIiJodHRwOi8vdGVzdHNlcnZlci9zcGFycWwvd2F0ZGl2MTAwIgM1MDAqGjIwMjItMDEtMDRUMTY6MDE6NTEuMTY2MjMxMOmkmgVA6aSaBUj0A1D0AzIOcmVnZXgoP3MsICJjIilA9ANI9AM=";
-
-
-const initialElements = [
-	{
-		id: '2',
-		type: 'special',
-		position: { x: 100, y: 100 },
-		data: { text: 'A custom node', className: 'cnode' },
-	},
-	{
-		id: '3',
-		type: 'special',
-		position: { x: 500, y: 100 },
-		data: { text: 'Another custom node', className: 'cnode'  },
-	},
-	{
-		id: '4',
-		type: 'special',
-		position: { x: 500, y: 300 },
-		data: { text: 'Yet Another custom node', className: 'cnode' },
-	},
-    {
-		id: '5',
-		type: 'special',
-		position: { x: 50, y: 300 },
-		data: { text: 'Small', className: 'cnode' },
-	},
-    {
-		id: '6',
-		type: 'special',
-		position: { x: 800, y: 300 },
-		data: { text: 'Another leaf', className: 'cnode' },
-	},
-    {
-		id: '7',
-		type: 'special',
-		position: { x: 800, y: 100 },
-		data: { text: 'Small', className: 'cnode' },
-	},
-    {
-		id: '8',
-		type: 'special',
-		position: { x: 800, y: 200 },
-		data: { text: 'Another leaf', className: 'cnode' },
-	},
-	{id: 'e1-2', source: '2', target: '3', animate: 'false'},
-    {id: 'e5-2', source: '5', target: '2', animate: 'false'},
-	{id: 'e1-X', source: '2', target: '4', animate: 'false'},
-    {id: 'e4-6', source: '4', target: '6', animate: 'false'},
-    {id: 'e3-7', source: '3', target: '7', animate: 'false'},
-    {id: 'e4-8', source: '4', target: '8', animate: 'false'},
-	
-];
+let sparqlRequest = {
+  "query": "SELECT ?s ?k { ?s ?p ?o . ?o ?p ?k . FILTER regex(?s, 'r', 'i') }",
+  "defaultGraph": "http://example.com/"
+};
+let sparqlServer = "http://localhost:8000/sparql";
 
 const initialGraph = protoplan_to_graph(newp);
 
@@ -126,7 +75,7 @@ const NodesDebugger = () => {
 };
 
 const CustomNodeExample = () => {
-    const [elements, setElements] = useState(initialGraph);
+    const [elements, setElements] = useState([]);
     const [lastSelection, setLastSelection] = useState(null);
 
     const onElementClick = (_, element) => {
@@ -161,12 +110,28 @@ const CustomNodeExample = () => {
         }
     }
 
+    useEffect(() => {
+        fetch(sparqlServer, {
+            method: 'POST',
+            body: JSON.stringify(sparqlRequest),
+            headers: {
+                "Content-type": "application/json",
+                "accept": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                let graph = protoplan_to_graph(data["next"]);
+                setElements((els) => els = graph);
+            })
+            .catch(error => console.log(error));
+    }, [setElements]);
 
     return (
         <div style={{ height: 600 }}>
             <ReactFlow elements={elements} nodeTypes={nodeTypes}
                     onElementClick={onElementClick}>
-              <NodesDebugger />
             </ReactFlow>
         </div>
 	);

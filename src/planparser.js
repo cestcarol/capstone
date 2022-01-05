@@ -3,12 +3,12 @@ var test = new proto.RootTree();
 console.log(test);
 const saved_plan = "ErQBErEBCiUKAj9zEgI/cBoCP28iF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0GikKAj9wEiNodHRwOi8vcHVybC5vcmcvZ29vZHJlbGF0aW9ucy9wcmljZRoKCgI/bxIEIjM2IhowCgI/cxIqaHR0cDovL2RiLnV3YXRlcmxvby5jYS9+Z2FsdWMvd3NkYm0vT2ZmZXIxIgMyNDYqGjIwMjEtMTItMTdUMTU6MTg6NTAuNTE1OTIy";
 
-const leaf = ['scanSource', 'insertSource', 'deleteSource', 'valuesRight'];
+const leaf = ['scanSource', 'insertSource', 'deleteSource', 'valueLeft', 'valuesRight', 'scanLeft', 'scanRight', 'deleteLeft', 'deleteRight', 'insertLeft', 'insertRight'];
 const is_leaf = (op) => {
   return leaf.includes(op);
 }
 
-const node = ['projSource', 'joinSource', 'unionSource', 'filterSource'];
+const node = ['projSource', 'joinSource', 'unionSource', 'filterSource', 'projLeft', 'projRight', 'joinLeft', 'joinRight', 'unionLeft', 'unionRight', 'filterLeft', 'filterRight'];
 const is_node = (op) => {
   return node.includes(op);
 }
@@ -36,7 +36,6 @@ const breadth_iter = (obj) => {
   while (queue.length > 0) {
     var [obj, parentId] = queue.shift();
     for (let key in obj) {
-
       if (obj[key] !== undefined && (is_node(key) || is_leaf(key))) {
         vertex.push({id: id, type: 'special', position: { x: 100, y: 100 }, data: { text: key, className: 'cnode' }});
         queue.push([obj[key], id]);
