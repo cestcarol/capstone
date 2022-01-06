@@ -1,19 +1,20 @@
-//import { json } from 'd3';
 import React, { useState, useEffect } from 'react';
-import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState, isEdge, getConnectedEdges, ReactFlowProvider, MiniMap } from 'react-flow-renderer';
+import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState, 
+    // isEdge, getConnectedEdges, ReactFlowProvider, MiniMap,
+} from 'react-flow-renderer';
+
 import CustomNodeComponent from './CustomNodeComponent';
-import LayoutFlow from './LayoutFlow';
 import { protoplan_to_graph } from './planparser';
 
 const nodeTypes = {
 	special: CustomNodeComponent,
 };
 
-const saved_plan = "ErQBErEBCiUKAj9zEgI/cBoCP28iF2h0dHA6Ly9leGFtcGxlLm9yZy90ZXN0GikKAj9wEiNodHRwOi8vcHVybC5vcmcvZ29vZHJlbGF0aW9ucy9wcmljZRoKCgI/bxIEIjM2IhowCgI/cxIqaHR0cDovL2RiLnV3YXRlcmxvby5jYS9+Z2FsdWMvd3NkYm0vT2ZmZXIxIgMyNDYqGjIwMjEtMTItMTdUMTU6MTg6NTAuNTE1OTIy";
-const nope = "EkoSSAolCgI/cxICP3AaAj9vIhdodHRwOi8vZXhhbXBsZS5vcmcvdGVzdCIDNTAwKhoyMDIyLTAxLTA0VDE0OjQ3OjEyLjYxNjA3Mg==";
-const newp = "EokBCgI/cAoCP3MKAj9vKnsKYwowCgI/cxICP3AaAj9vIiJodHRwOi8vdGVzdHNlcnZlci9zcGFycWwvd2F0ZGl2MTAwIgM1MDAqGjIwMjItMDEtMDRUMTY6MDE6NTEuMTY2MjMxMOmkmgVA6aSaBUj0A1D0AzIOcmVnZXgoP3MsICJjIilA9ANI9AM=";
-
-const initialGraph = protoplan_to_graph(newp);
+let sparqlRequest = {
+  "query": "SELECT ?s ?k { ?s ?p ?o . ?o ?p ?k . FILTER regex(?s, 'r', 'i') }",
+  "defaultGraph": "http://example.org/test"
+};
+let sparqlServer = "http://localhost:8000/sparql";
 
 function swapLeafs(n1, n2, elements) {
     var p1 = getIncomers(n1, elements).at(0);
@@ -67,7 +68,7 @@ const NodesDebugger = () => {
 };
 
 const CustomNodeExample = () => {
-    const [elements, setElements] = useState(initialGraph);
+    const [elements, setElements] = useState([]);
     const [lastSelection, setLastSelection] = useState(null);
 
     const onElementClick = (_, element) => {
@@ -102,16 +103,29 @@ const CustomNodeExample = () => {
         }
     }
 
+    useEffect(() => {
+        fetch(sparqlServer, {
+            method: 'POST',
+            body: JSON.stringify(sparqlRequest),
+            headers: {
+                "Content-type": "application/json",
+                "accept": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                let graph = protoplan_to_graph(data["next"]);
+                setElements((els) => els = graph);
+            })
+            .catch(error => console.log(error));
+    }, [setElements]);
 
     return (
         <div style={{ height: 600 }}>
-            <LayoutFlow 
-                initialElements={elements}
-                //elements={elements} 
-                nodeTypes={nodeTypes}
-                onElementClick={onElementClick}>
-              <NodesDebugger />
-            </LayoutFlow>
+            <ReactFlow elements={elements} nodeTypes={nodeTypes}
+                    onElementClick={onElementClick}>
+            </ReactFlow>
         </div>
 	);
 };
