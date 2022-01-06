@@ -1,6 +1,6 @@
 import { Handle } from 'react-flow-renderer';
 
-import RandomProgressBar from './RandomProgressBar';
+//import RandomProgressBar from './RandomProgressBar';
 
 const customNodeStyles = {
 	background: '#9CA8B3',
