@@ -80,46 +80,38 @@ const NodesDebugger = () => {
 
 const CustomNodeExample = () => {
     const [elements, setElements] = useState([]);
-    const [lastSelection, setLastSelection] = useState(null);
+    const [userQuery, setUserQuery] = useState(null);
+    const [query, setQuery] = useState(sparqlRequest);
+    const [toggle, setToggle] = useState(false);
+    const [stop, setStop] = useState(false);
 
-    const onElementClick = (_, element) => {
-        if (lastSelection != null && lastSelection !== element) {
-            console.log('Change position of ', lastSelection.id, ' and ', element.id);
+    const handleChange = (event) => {
+        setUserQuery(event.target.value);
+    };
 
-            var n1 = {...lastSelection, position: element.position};
-            var n2 = {...element, position: lastSelection.position};
-            var n1childs = getOutgoers(lastSelection, elements).length;
-            var n2childs =getOutgoers(element, elements).length;
-            if ( n1childs === 0 && n2childs === 0) {
-                var edges = swapLeafs(n1,n2, elements);
-                console.log("swap leafs", lastSelection.id, " and ", element.id);
-                setElements((els) => removeElements([lastSelection, element], els));
-                setElements((els) => els.concat(n1, n2, edges));
-            }
-            else if (n1childs > 0 && n2childs > 0) {
-                var edges = swapInternalNodes(n1, n2, elements);
-                console.log("swap leafs", lastSelection.id, " and ", element.id);
-                setElements((els) => removeElements([lastSelection, element], els));
-                setElements((els) => els.concat(n1, n2, edges));
-            }
-            else {
-                console.log('Cannot swap internal and leafs');
-            }
-            console.log(elements);
-            setLastSelection(null);
+    const handleSubmit = (event) => {
+        if (userQuery !== null) {
+            console.log("send user query");
+            setQuery(JSON.parse(userQuery));
+            setUserQuery(null);
         }
-        else {
-            //console.log('Register ', element.id, ' as last selection.')
-            setLastSelection(element);
+        setToggle(!toggle);
+        event.preventDefault();
+    };
+
+    const run = () => {
+        var i = 0;
+        while (!stop && i < 20) {
+            setToggle(!toggle);
+            i++;
         }
     }
 
-    const something = () => {};
-
     useEffect(() => {
+        console.log("fetching ", JSON.stringify(query));
         fetch(sparqlServer, {
             method: 'POST',
-            body: JSON.stringify(sparqlRequest),
+            body: JSON.stringify(query),
             headers: {
                 "Content-type": "application/json",
                 "accept": "application/json"
@@ -129,21 +121,27 @@ const CustomNodeExample = () => {
             .then((data) => {
                 console.log(data);
                 let graph = protoplan_to_graph(data["next"]);
-                setElements((els) => els = graph);
+                setQuery( {...query, next:data["next"]} )
+                setElements(graph);
             })
             .catch(error => console.log(error));
-    }, [setElements]);
+    }, [setElements, toggle]);
 
     return (
         <div style={{ height: 600 }}>
             <LayoutFlow 
                 initialElements={elements}
-                nodeTypes={nodeTypes}
-                onElementClick={onElementClick}>
-              <div className="nextButton">
-                <button onClick={something}>Next results</button>
-              </div>
+                nodeTypes={nodeTypes}>
             </LayoutFlow>
+            <form onSubmit={handleSubmit}>
+                <label>Query</label>
+                <br/>
+              <textarea id="sparqlQuery" name="sparqlquery" row="20" col="75" defaultValue={JSON.stringify(query)} onChange={handleChange}/>
+                <br/>
+                <input type="submit" value="Send"/>
+            </form>
+            <button onClick={run}>Run</button>
+          <button onClick={() => setStop(true)}>Stop</button>
         </div>
     );
 };
