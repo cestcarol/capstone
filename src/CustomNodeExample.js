@@ -12,7 +12,7 @@ const nodeTypes = {
 
 let sparqlRequest = {
   "query": "SELECT ?s ?k { ?s ?p ?o . ?o ?p ?k . FILTER regex(?s, 'r', 'i') }",
-  "defaultGraph": "http://example.com/"
+  "defaultGraph": "http://example.org/test"
 };
 let sparqlServer = "http://localhost:8000/sparql";
 

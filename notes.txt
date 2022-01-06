@@ -3,7 +3,7 @@ init
 
 npx use webpack for bundling and the Babel compiler
     
-deply using
+deploy using
     npm run build
 
 next.js as styling ramework
@@ -32,21 +32,48 @@ npm install
   react react-dom react-force-graph-2d 
   google-protobuf bezier-js@4.0.3
 
-  ===
+=== Sage-Engine
 
-  Co server
-  button click 'next'
-  récupérer les infos 
-    bindings : resultat / triple de la req
-    hasNext : bool 
-    next : string protobuf encoded   
-    stats : cardinality/
-        metrics : cost, coverage, progression
-    
-    et si on decode Next :
+Get the rl-xp branch (main branch doesn't work) and install dep via poetry :
+    git clone -b rl-xp https://github.com/sage-org/sage-engine
+    cd sage-engine
+    poetry install --extras "hdt postgres hbase"
+
+Enter poetry env:
+    poetry shell
+
+Get the persondata.hdt file and test_config.yaml and move them to tests/data/
+
+Run server:
+    sage tests/data/test_config.yaml -w 4 -p 8000
+
+==== FIX "AttributeError : can't set attribute" 
+https://github.com/RDFLib/rdflib/issues/1204
+
+my version (in poetry shell):
+> pip list | grep pyparsing
+pyparsing    3.0.6
+
+attempt fix (in poetry shell):
+> pip install pyparsing==2.4.7
 
 
-réussir à afficher dans e noeux 
+
+--- TODO
+
+Co server
+button click 'next'
+récupérer les infos 
+bindings : resultat / triple de la req
+hasNext : bool 
+next : string protobuf encoded   
+stats : cardinality/
+    metrics : cost, coverage, progression
+
+et si on decode Next :
+
+
+réussir à afficher dans un noeux 
 - le 'o?' courant 
 - et "numero de tuple courant" / "cardinalité"
 
