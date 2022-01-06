@@ -13,16 +13,16 @@ const CustomNodeComponent = ({ data }) => {
 		<div style={customNodeStyles}>
 			<Handle
 				type="source"
-				position="top"
-				style={{ borderRadius: 0 }} />
+				position="bottom"
+				style={{ opacity: 0.0 }} />
 			<div>{data.label}</div>
 
 			<div>{data.text}</div>
 			{ /* <RandomProgressBar /> */ }
 			<Handle
 				type="target"
-				position="bottom"
-				style={{ top: '100%', borderRadius: 0 }} />
+				position="top"
+				style={{ opacity: 0.0 }} />
 		</div>
 	);
 };
