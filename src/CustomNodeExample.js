@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState, 
-    // isEdge, getConnectedEdges, ReactFlowProvider, MiniMap,
+import ReactFlow, {
+    isEdge,
+    getConnectedEdges,
+    getOutgoers,
+    getIncomers,
+    useStoreState,
+    ReactFlowProvider,
+    addEdge,
+    removeElements,
+    Controls,
 } from 'react-flow-renderer';
 
 import CustomNodeComponent from './CustomNodeComponent';
+import Sidebar from './Sidebar';
+import './Provider.css';
 import { protoplan_to_graph } from './planparser';
 import LayoutFlow from './LayoutFlow';
 
@@ -99,10 +109,12 @@ const CustomNodeExample = () => {
             setLastSelection(null);
         }
         else {
-            console.log('Register ', element.id, ' as last selection.')
+            //console.log('Register ', element.id, ' as last selection.')
             setLastSelection(element);
         }
     }
+
+    const something = () => {};
 
     useEffect(() => {
         fetch(sparqlServer, {
@@ -128,9 +140,12 @@ const CustomNodeExample = () => {
                 initialElements={elements}
                 nodeTypes={nodeTypes}
                 onElementClick={onElementClick}>
+              <div className="nextButton">
+                <button onClick={something}>Next results</button>
+              </div>
             </LayoutFlow>
         </div>
-	);
+    );
 };
 
 export default CustomNodeExample;
