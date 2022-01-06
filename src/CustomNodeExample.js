@@ -5,6 +5,7 @@ import ReactFlow, { removeElements, getOutgoers, getIncomers, useStoreState,
 
 import CustomNodeComponent from './CustomNodeComponent';
 import { protoplan_to_graph } from './planparser';
+import LayoutFlow from './LayoutFlow';
 
 const nodeTypes = {
 	special: CustomNodeComponent,
@@ -12,7 +13,7 @@ const nodeTypes = {
 
 let sparqlRequest = {
   "query": "SELECT ?s ?k { ?s ?p ?o . ?o ?p ?k . FILTER regex(?s, 'r', 'i') }",
-  "defaultGraph": "http://example.com/"
+  "defaultGraph": "http://example.org/test"
 };
 let sparqlServer = "http://localhost:8000/sparql";
 
@@ -123,9 +124,12 @@ const CustomNodeExample = () => {
 
     return (
         <div style={{ height: 600 }}>
-            <ReactFlow elements={elements} nodeTypes={nodeTypes}
-                    onElementClick={onElementClick}>
-            </ReactFlow>
+            <LayoutFlow 
+                initialElements={elements}
+                //elements={elements} 
+                nodeTypes={nodeTypes}
+                onElementClick={onElementClick}>
+            </LayoutFlow>
         </div>
 	);
 };
