@@ -126,7 +126,6 @@ const CustomNodeExample = () => {
         <div style={{ height: 600 }}>
             <LayoutFlow 
                 initialElements={elements}
-                //elements={elements} 
                 nodeTypes={nodeTypes}
                 onElementClick={onElementClick}>
             </LayoutFlow>

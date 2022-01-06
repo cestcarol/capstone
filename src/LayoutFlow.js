@@ -6,7 +6,6 @@ import
 import ReactFlow, { isNode } from 'react-flow-renderer';
 import CustomNodeComponent from './CustomNodeComponent';
 import ELK from 'elkjs';
-// import { getBezierPath } from "react-flow-renderer"
 
 const DEFAULT_WIDTH = 210
 const DEFAULT_HEIGHT = 100
@@ -87,35 +86,3 @@ const LayoutFlow = ({initialElements}) => {
 }
 
 export default LayoutFlow;
-
-
-
-/*
-const position = { x: 0, y: 0 };
-const edgeType = 'smoothstep';
-const initialElements = [
-  {
-      id: '2',
-      type: 'special',
-      position,
-      width: 200, height: 70,
-      data: { lable: 'node2', text: 'A custom node' },
-  },
-  {
-      id: '3',
-      type: 'special',
-      position,
-      width: 200, height: 70,
-      data: { label: 'node3', text: 'Another custom node' },
-  },
-  {
-      id: '4',
-      type: 'special',
-      position,
-      width: 200, height: 70,
-      data: { label: 'node4', text: 'Yet Another custom node' },
-  },
-  { id: 'e2-3', source: '2', target: '3', type: edgeType, animate: 'false' },
-  { id: 'e2-4', source: '2', target: '4', type: edgeType, animate: 'false' }
-]
-*/
