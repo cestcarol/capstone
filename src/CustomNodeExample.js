@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ReactFlow, {
     isEdge,
     getConnectedEdges,
@@ -12,8 +14,8 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 
 import CustomNodeComponent from './CustomNodeComponent';
-import Sidebar from './Sidebar';
-import './Provider.css';
+//import Sidebar from './Sidebar';
+//import './Provider.css';
 import { protoplan_to_graph } from './planparser';
 import LayoutFlow from './LayoutFlow';
 
@@ -22,7 +24,7 @@ const nodeTypes = {
 };
 
 let sparqlRequest = {
-  "query": "SELECT ?s ?k { ?s ?p ?o . ?o ?p ?k . FILTER regex(?s, 'r', 'i') }",
+  "query": "SELECT * { ?s ?p ?o }",
   "defaultGraph": "http://example.org/test"
 };
 let sparqlServer = "http://localhost:8000/sparql";
@@ -107,6 +109,12 @@ const CustomNodeExample = () => {
         }
     }
 
+
+
+
+
+
+
     useEffect(() => {
         console.log("fetching ", JSON.stringify(query));
         fetch(sparqlServer, {
@@ -129,19 +137,21 @@ const CustomNodeExample = () => {
 
     return (
         <div style={{ height: 600 }}>
-            <LayoutFlow 
+            <LayoutFlow
                 initialElements={elements}
                 nodeTypes={nodeTypes}>
             </LayoutFlow>
             <form onSubmit={handleSubmit}>
                 <label>Query</label>
                 <br/>
-              <textarea id="sparqlQuery" name="sparqlquery" row="20" col="75" defaultValue={JSON.stringify(query)} onChange={handleChange}/>
+              <textarea id="sparqlQuery" name="sparqlquery" row="20" col="100" defaultValue={JSON.stringify(query)} onChange={handleChange}/>
                 <br/>
-                <input type="submit" value="Send"/>
+                <Button variant="light" type="submit">Send</Button>
             </form>
-            <button onClick={run}>Run</button>
-          <button onClick={() => setStop(true)}>Stop</button>
+          <ButtonGroup aria-label="Basic example">
+          <Button variant="secondary" active onClick={run}>Run</Button>
+          <Button variant="secondary" active onClick={() => setStop(true)}>Stop</Button>
+          </ButtonGroup>
         </div>
     );
 };
