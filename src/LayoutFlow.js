@@ -7,8 +7,9 @@ import ReactFlow, { isNode, Controls } from 'react-flow-renderer';
 import CustomNodeComponent from './CustomNodeComponent';
 import ELK from 'elkjs';
 
-const DEFAULT_WIDTH = 210
-const DEFAULT_HEIGHT = 100
+
+const DEFAULT_WIDTH = 310
+const DEFAULT_HEIGHT = 130
 
 const elk = new ELK({
   defaultLayoutOptions: {
@@ -17,7 +18,7 @@ const elk = new ELK({
     'elk.spacing.nodeNode': '75',
     'elk.layered.spacing.nodeNodeBetweenLayers': '75'
   }
-})
+})  
 
 const createGraphLayout = async (elements) => {
   const nodes = []
@@ -49,8 +50,8 @@ const createGraphLayout = async (elements) => {
       const node = newGraph?.children?.find((n) => n.id === el.id)
       if (node?.x && node?.y && node?.width && node?.height) {
         el.position = {
-          x: node.x, //- node.width / 4  , //+ Math.random() / 1000,
-          y: node.y  //- node.height / 2
+          x: node.x + node.width,
+          y: node.y 
         }
       }
     }
@@ -72,16 +73,21 @@ const LayoutFlow = ({initialElements}) => {
       .catch(err => console.error(err))
   }, [initialElements])
 
+  //automatic center when loading this componenet
+  const onLoad = (reactFlowInstance) => {
+    reactFlowInstance.fitView();
+}
   return (
       <ReactFlow 
       style={{
-        width: 700, height: 500,
+        width: 1200, height: 1000,
         position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',
         //backgroundColor: 'red'
       }}
         elements={elements}
-        nodeTypes={nodeTypes} >
+        nodeTypes={nodeTypes} 
+        onLoad={onLoad}>
         <Controls />
       </ReactFlow>
   )
