@@ -3,7 +3,7 @@ import
      { useState, useEffect
     //useCallback, useAsync, Component
  } from 'react';
-import ReactFlow, { isNode } from 'react-flow-renderer';
+import ReactFlow, { isNode, Controls } from 'react-flow-renderer';
 import CustomNodeComponent from './CustomNodeComponent';
 import ELK from 'elkjs';
 
@@ -81,7 +81,9 @@ const LayoutFlow = ({initialElements}) => {
         backgroundColor: 'red'
       }}
         elements={elements}
-        nodeTypes={nodeTypes} />
+        nodeTypes={nodeTypes} >
+        <Controls />
+      </ReactFlow>
   )
 }
 
