@@ -76,9 +76,9 @@ const LayoutFlow = ({initialElements}) => {
       <ReactFlow 
       style={{
         width: 700, height: 500,
-              position: 'absolute', left: '50%', top: '50%',
+        position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'red'
+        //backgroundColor: 'red'
       }}
         elements={elements}
         nodeTypes={nodeTypes} />
