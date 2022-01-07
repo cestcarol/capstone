@@ -19,12 +19,9 @@ const CustomNodeComponent = ({ data }) => {
 			<div>{data.label}</div>
 			<div>{data.text}</div>
 			{  <RandomProgressBar />  }
-
 			<div>lastRead : {data.lastRead}</div>
 			<div>cardinality : {data.cardinality}</div>
-			<div>consumed : {data.consumed}</div>
-			<div>Current 'o?' : {data.lastSeen}</div>
-
+			<div>consumed : {data.consumed}</div>	
 			<Handle
 				type="target"
 				position="top"
