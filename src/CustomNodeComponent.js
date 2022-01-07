@@ -9,6 +9,7 @@ const customNodeStyles = {
 };
 
 const CustomNodeComponent = ({ data }) => {
+
 	return (
 		<div style={customNodeStyles}>
 			<Handle
@@ -16,9 +17,14 @@ const CustomNodeComponent = ({ data }) => {
 				position="bottom"
 				style={{ opacity: 0.0 }} />
 			<div>{data.label}</div>
-
 			<div>{data.text}</div>
 			{  <RandomProgressBar />  }
+
+			<div>lastRead : {data.lastRead}</div>
+			<div>cardinality : {data.cardinality}</div>
+			<div>consumed : {data.consumed}</div>
+			<div>Current 'o?' : {data.lastSeen}</div>
+
 			<Handle
 				type="target"
 				position="top"

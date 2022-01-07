@@ -20,7 +20,8 @@ const breadth_iter = (obj) => {
     var [o, parentId] = queue.shift();
     for (let key in o) {
       if (o[key] !== undefined && (is_node(key) || is_leaf(key))) {
-        vertex.push({id: id.toString(), type: 'special', position: { x: 100, y: 100 }, data: { text: key, className: 'cnode' }});
+        vertex.push({id: id.toString(), type: 'special', position: { x: 100, y: 100 }, 
+                     data: { text: key, className: 'cnode', lastRead:o[key]["lastRead"]??undefined, consumed:o[key]["consumed"]??undefined, cardinality:o[key]["cardinality"]??undefined }});
         queue.push([o[key], id]);
         if (parentId !== null) {
           edges.push({id: 'e'+parentId+id, source: parentId.toString(), target: id.toString(), animate: 'false'});
