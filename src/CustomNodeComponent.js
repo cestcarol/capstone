@@ -4,10 +4,10 @@ import RandomProgressBar from './RandomProgressBar';
 
 const customNodeStyles = {
 	background: '#9CA8B3',
-	color: '#FFF',
+	color: '#000000',
 	width:'150px',
 	padding: 5,
-	border: '2px solid black',
+	border: '1px solid black',
 	borderRadius: 12,
 };
 
@@ -25,7 +25,7 @@ const CustomNodeComponent = ({ data }) => {
 			{  <RandomProgressBar />  }
 			<div>lastRead : {data.lastRead}</div>
 			<div>cardinality : {data.cardinality}</div>
-			<div>consumed : {data.consumed}</div>	
+			<div>consumed : {data.consumed}</div>
 			<Handle
 				type="target"
 				position="top"

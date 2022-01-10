@@ -1,4 +1,4 @@
-import 
+import
     //React,
      { useState, useEffect
     //useCallback, useAsync, Component
@@ -18,7 +18,7 @@ const elk = new ELK({
     'elk.spacing.nodeNode': '75',
     'elk.layered.spacing.nodeNodeBetweenLayers': '75'
   }
-})  
+})
 
 const createGraphLayout = async (elements) => {
   const nodes = []
@@ -51,7 +51,7 @@ const createGraphLayout = async (elements) => {
       if (node?.x && node?.y && node?.width && node?.height) {
         el.position = {
           x: node.x + node.width,
-          y: node.y 
+          y: node.y
         }
       }
     }
@@ -81,15 +81,16 @@ const LayoutFlow = ({initialElements}) => {
 //const onLoad=(reactFlowInstance) => setTimeout(() => reactFlowInstance.fitView(),0  )
 
   return (
-      <ReactFlow 
+      <ReactFlow
       style={{
-        width: 1000, height: 1000,
-        position: 'absolute', left: '50%', top: '50%',
+        width: 1000, height: 600,
+        position: 'absolute', left: '60%', top: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'red'
+        backgroundColor: '#DCDCDC',
+        border: '1px solid black'
       }}
         elements={elements}
-        nodeTypes={nodeTypes} 
+        nodeTypes={nodeTypes}
         //onLoad={onLoad}
         //fitViewOnInit
         >

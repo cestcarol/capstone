@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Navbar from 'react-bootstrap/Navbar'
 import ReactFlow, {
     isEdge,
     getConnectedEdges,
@@ -136,15 +137,29 @@ const CustomNodeExample = () => {
     }, [setElements, toggle]);
 
     return (
-        <div style={{ height: 600 }}>
+
+
+
+        <div style={{ height: 500 }}>
+
+        
+
+
             <LayoutFlow
                 initialElements={elements}
                 nodeTypes={nodeTypes}>
             </LayoutFlow>
+
+            <div style={{backgroundColor: '#DCDCDC',
+          position:'absolute', left: '1%', top: '1%',
+          height: 600,
+          width:230,
+          border:'1px solid black '
+        }}>
             <form onSubmit={handleSubmit}>
                 <label>Query</label>
                 <br/>
-              <textarea id="sparqlQuery" name="sparqlquery" row="20" col="100" defaultValue={JSON.stringify(query)} onChange={handleChange}/>
+              <textarea id="sparqlQuery" name="sparqlquery" defaultValue={JSON.stringify(query)} rows="5" cols="25"  onChange={handleChange}/>
                 <br/>
                 <Button variant="light" type="submit">Send</Button>
             </form>
@@ -152,6 +167,7 @@ const CustomNodeExample = () => {
           <Button variant="secondary" active onClick={run}>Run</Button>
           <Button variant="secondary" active onClick={() => setStop(true)}>Stop</Button>
           </ButtonGroup>
+          </div>
         </div>
     );
 };
