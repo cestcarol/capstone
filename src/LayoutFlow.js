@@ -73,21 +73,26 @@ const LayoutFlow = ({initialElements}) => {
       .catch(err => console.error(err))
   }, [initialElements])
 
-  //automatic center when loading this componenet
-  const onLoad = (reactFlowInstance) => {
+  //automatic center when loading this component ?
+  /*const onLoad = (reactFlowInstance) => {
     reactFlowInstance.fitView();
-}
+
+}*/
+//const onLoad=(reactFlowInstance) => setTimeout(() => reactFlowInstance.fitView(),0  )
+
   return (
       <ReactFlow 
       style={{
-        width: 1200, height: 1000,
+        width: 1000, height: 1000,
         position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',
-        //backgroundColor: 'red'
+        backgroundColor: 'red'
       }}
         elements={elements}
         nodeTypes={nodeTypes} 
-        onLoad={onLoad}>
+        //onLoad={onLoad}
+        //fitViewOnInit
+        >
         <Controls />
       </ReactFlow>
   )
