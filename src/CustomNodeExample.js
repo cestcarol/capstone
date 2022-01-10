@@ -142,31 +142,44 @@ const CustomNodeExample = () => {
 
         <div style={{ height: 500 }}>
 
-        
+        <header>
+        <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="#home">
+      Execution plan
+      </Navbar.Brand>
+      </Navbar>
+      </header>
 
-
+            <div>
             <LayoutFlow
                 initialElements={elements}
                 nodeTypes={nodeTypes}>
             </LayoutFlow>
+            </div>
+
 
             <div style={{backgroundColor: '#DCDCDC',
-          position:'absolute', left: '1%', top: '1%',
-          height: 600,
+          position:'relative', left: '1%', top: '1%',
+          height: 530,
           width:230,
-          border:'1px solid black '
+          border:'1px solid black ',
         }}>
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={handleSubmit} style={{padding:'10px 0 0 5px'}}>
                 <label>Query</label>
                 <br/>
               <textarea id="sparqlQuery" name="sparqlquery" defaultValue={JSON.stringify(query)} rows="5" cols="25"  onChange={handleChange}/>
                 <br/>
                 <Button variant="light" type="submit">Send</Button>
             </form>
-          <ButtonGroup aria-label="Basic example">
+            <div style={{ padding:'10px 0 0 5px' }}>
+          <ButtonGroup aria-label="Basic example" >
           <Button variant="secondary" active onClick={run}>Run</Button>
           <Button variant="secondary" active onClick={() => setStop(true)}>Stop</Button>
           </ButtonGroup>
+          </div>
+
+
           </div>
         </div>
     );

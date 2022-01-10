@@ -83,8 +83,8 @@ const LayoutFlow = ({initialElements}) => {
   return (
       <ReactFlow
       style={{
-        width: 1000, height: 600,
-        position: 'absolute', left: '60%', top: '50%',
+        width: 1000, height: 500,
+        position: 'absolute', left: '60%', top: '55%',
         transform: 'translate(-50%, -50%)',
         backgroundColor: '#DCDCDC',
         border: '1px solid black'

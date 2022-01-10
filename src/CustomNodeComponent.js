@@ -23,9 +23,9 @@ const CustomNodeComponent = ({ data }) => {
 
 			<h4>{data.text}</h4>
 			{  <RandomProgressBar />  }
-			<div>lastRead : {data.lastRead}</div>
-			<div>cardinality : {data.cardinality}</div>
-			<div>consumed : {data.consumed}</div>
+			<div>lastRead : <i>{data.lastRead}</i></div>
+			<div>cardinality : <i>{data.cardinality}</i></div>
+			<div>consumed : <i>{data.consumed}</i></div>
 			<Handle
 				type="target"
 				position="top"
