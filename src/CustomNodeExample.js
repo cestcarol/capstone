@@ -150,23 +150,24 @@ const CustomNodeExample = () => {
       </Navbar>
       </header>
 
-            <div>
+      <div style={{
+    padding:'5px 5px 5px 5px'}}>
+
             <LayoutFlow
                 initialElements={elements}
                 nodeTypes={nodeTypes}>
             </LayoutFlow>
-            </div>
 
 
             <div style={{backgroundColor: '#DCDCDC',
-          position:'relative', left: '1%', top: '1%',
           height: 530,
           width:230,
           border:'1px solid black ',
+          borderRadius: 5,
         }}>
 
             <form onSubmit={handleSubmit} style={{padding:'10px 0 0 5px'}}>
-                <label>Query</label>
+                <label><b>Query</b></label>
                 <br/>
               <textarea id="sparqlQuery" name="sparqlquery" defaultValue={JSON.stringify(query)} rows="5" cols="25"  onChange={handleChange}/>
                 <br/>
@@ -177,6 +178,7 @@ const CustomNodeExample = () => {
           <Button variant="secondary" active onClick={run}>Run</Button>
           <Button variant="secondary" active onClick={() => setStop(true)}>Stop</Button>
           </ButtonGroup>
+          </div>
           </div>
 
 
