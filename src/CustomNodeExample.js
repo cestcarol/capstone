@@ -160,8 +160,8 @@ const CustomNodeExample = () => {
 
 
             <div style={{backgroundColor: '#DCDCDC',
-          height: 530,
-          width:230,
+          height: '100%',
+          width:'18%',
           border:'1px solid black ',
           borderRadius: 5,
         }}>
