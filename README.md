@@ -2,7 +2,28 @@
 
 `npm ci`
 or
-`npm install react-scripts react-flow-renderer elkjs web-worker`
+`npm install react react-dom react-scripts react-flow-renderer elkjs web-worker google-protobuf bezier-js@4.0.3`
+
+## Sage-Engine Dependencies
+
+Get the rl-xp branch (main branch doesn't work) and install dep via poetry :
+    `git clone -b rl-xp https://github.com/sage-org/sage-engine`
+    `cd sage-engine`
+    `poetry install --extras "hdt postgres hbase"`
+
+Enter poetry env:
+    `poetry shell`
+
+Get the persondata.hdt file and test_config.yaml and move them to tests/data/
+
+Run server:
+    `sage tests/data/test_config.yaml -w 4 -p 8000`
+
+### FIX "AttributeError : can't set attribute" when running sage
+https://github.com/RDFLib/rdflib/issues/1204
+
+fix (in poetry shell):
+`pip install pyparsing==2.4.7`
 
 # Getting Started with Create React App
 
